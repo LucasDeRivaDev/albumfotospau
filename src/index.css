@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════
+   CSS VARIABLES POR TEMA
+   Se aplican poniendo data-theme="princess" en el <html>
+   ═══════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="default"] {
+  --theme-bg: #0f0f0f;
+  --theme-surface: #1a1a1a;
+  --theme-accent: #6366f1;
+  --theme-accent-soft: #6366f120;
+  --theme-text: #f0f0f0;
+  --theme-text-muted: #888888;
+  --theme-border: #2a2a2a;
+  --theme-card-hover: #242424;
+  --theme-overlay: rgba(0, 0, 0, 0.85);
+}
+
+[data-theme="princess"] {
+  --theme-bg: #fff0f8;
+  --theme-surface: #fff5fb;
+  --theme-accent: #e91e8c;
+  --theme-accent-soft: #e91e8c20;
+  --theme-text: #2d1a24;
+  --theme-text-muted: #9e6e88;
+  --theme-border: #f9d0e8;
+  --theme-card-hover: #ffe8f5;
+  --theme-overlay: rgba(45, 26, 36, 0.88);
+}
+
+[data-theme="dino"] {
+  --theme-bg: #0f1a0f;
+  --theme-surface: #152015;
+  --theme-accent: #4caf50;
+  --theme-accent-soft: #4caf5020;
+  --theme-text: #e8f5e9;
+  --theme-text-muted: #81c784;
+  --theme-border: #1e3a1e;
+  --theme-card-hover: #1a2e1a;
+  --theme-overlay: rgba(15, 26, 15, 0.90);
+}
+
+[data-theme="animals"] {
+  --theme-bg: #1a1208;
+  --theme-surface: #251a0a;
+  --theme-accent: #ff8f00;
+  --theme-accent-soft: #ff8f0020;
+  --theme-text: #fff8f0;
+  --theme-text-muted: #bf9d7a;
+  --theme-border: #3d2a12;
+  --theme-card-hover: #2e1f0e;
+  --theme-overlay: rgba(26, 18, 8, 0.90);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE GLOBAL
+   ═══════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLLBAR CUSTOM
+   ═══════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-accent);
+}
+
+/* ═══════════════════════════════════════════════════════
+   ANIMACIONES — suaves, sin cosas pesadas
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease forwards;
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--theme-surface) 25%,
+    var(--theme-border) 50%,
+    var(--theme-surface) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* ═══════════════════════════════════════════════════════
+   IMAGEN CON LAZY LOAD — efecto de blur a nitida
+   ═══════════════════════════════════════════════════════ */
+
+.photo-img {
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.photo-img.loaded {
+  opacity: 1;
+  filter: blur(0);
+}
